@@ -1,61 +1,70 @@
 // import functions and grab DOM elements
 let catPic = document.getElementById('cat-pic');
 let catSound = document.getElementById('cat-sound');
-let meowCounter = document.getElementById('meow-counter');
+let meowCountDisplay = document.getElementById('meow-counter');
 
 let dogPic = document.getElementById('dog-pic');
 let dogSound = document.getElementById('dog-sound');
-let woofCounter = document.getElementById('woof-counter');
+let woofCountDisplay = document.getElementById('woof-counter');
 
 let horsePic = document.getElementById('horse-pic');
 let horseSound = document.getElementById('horse-sound');
-let HUHUHUHUCounter = document.getElementById('HUHUHUHU-counter');
+let HUHUHUHUCountDisplay = document.getElementById('HUHUHUHU-counter');
 
 let display = document.getElementById('animal-display');
 
 // initialize state
-let meows = 0;
-let woofs = 0;
-let HUHUHUHUs = 0;
+let meowCountHolder = {
+  count: 0
+};
+let woofCountHolder = {
+  count: 0
+};
+let HUHUHUHUCountHolder = {
+  count: 0
+};
 
 // set event listeners 
   // get user input
   // use user input to update state 
   // update DOM to reflect the new state
 
-let meow = () => {
-  catSound.play();
-  display.textContent="The cat goes: 'meow'";
-  meows++;
-  meowCounter.textContent = '' + meows + ' meows';
+let resetDisplay = () => {
+  display.textContent = 'Click an animal to hear the sound it makes!';
 }
 
-let woof = () => {
-  dogSound.play();
-  display.textContent="The dog goes: 'woof'";
-  woofs++;
-  woofCounter.textContent = '' + woofs + ' woofs'
+let handleAnimalClick = (soundEl, countEl, count, animalName, soundString) => {
+  soundEl.play();
+  display.textContent = 'The ' + animalName + " goes: '" + soundString +"'";
+  count.count++;
+  countEl.textContent = '' + count.count + ' ' + soundString + 's';
+  setTimeout(resetDisplay, 2000);
 }
 
-let HUHUHUHU = () => {
-  horseSound.play();
-  display.textContent="The horse goes: 'HUHUHUHU'";
-  HUHUHUHUs++;
-  HUHUHUHUCounter.textContent = '' + HUHUHUHUs + ' HUHUHUHUs'
+let doMeow = () => {
+  handleAnimalClick(catSound, meowCountDisplay, meowCountHolder, 'cat', 'meow');
 }
 
-catPic.addEventListener('click', meow);
+let doWoof = () => {
+  handleAnimalClick(dogSound, woofCountDisplay, woofCountHolder, 'dog', 'woof');
+}
 
-dogPic.addEventListener('click', woof);
+let doHUHUHUHU = () => {
+  handleAnimalClick(horseSound, HUHUHUHUCountDisplay, HUHUHUHUCountHolder, 'horse', 'HUHUHUHU');
+}
 
-horsePic.addEventListener('click', HUHUHUHU);
+catPic.addEventListener('click', doMeow);
+
+dogPic.addEventListener('click', doWoof);
+
+horsePic.addEventListener('click', doHUHUHUHU);
 
 document.addEventListener('keyup', (e) => {
   if(e.key === "c") {
-    meow();
+    doMeow();
   } else if(e.key === "d") {
-    woof();
+    doWoof();
   } else if(e.key === "h") {
-    HUHUHUHU();
+    doHUHUHUHU();
   }
 });
