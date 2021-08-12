@@ -53,6 +53,36 @@ header {
     box-shadow: var(--shadow);
 }
 
+#animal-display {
+    position:absolute;
+    left: 43%;
+}
+
+.animals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.animal {
+    padding:15px;
+    border-width: 1px;
+    border-color: gray;
+    border-style: solid;
+    border-radius: 5px;
+    margin:15px;
+    height: 370px;
+}
+
+.animal img {
+    width: 270px;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+}
+
+.animal img:hover {
+    border-radius: 40px;
+}
+
 footer {
     display: flex;
     justify-content: flex-end;
